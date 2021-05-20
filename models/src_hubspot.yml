@@ -150,10 +150,14 @@ sources:
           - name: value
             description: '{{ doc("history_value") }}'
 
-      - name: contact
+      - name: contact_data
         freshness:
           warn_after: {count: 84, period: hour}
           error_after: {count: 168, period: hour}
+        meta:
+          is_enabled: "{{ var('hubspot_marketing_enabled', true) and var('hubspot_contact_enabled', true) }}"
+          # is_enabled: false
+
         description: Each record represents a contact in Hubspot.
         columns:
           - name: id
